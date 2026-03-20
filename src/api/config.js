@@ -1,13 +1,6 @@
 import axios from "axios";
 
-/**
- * Instance Axios configurée pour communiquer avec le backend
- * Base URL: http://localhost:3000/
- * Timeout: 5000ms (increased for DB operations)
- */
 const instance = axios.create({
-  // baseURL: "http://localhost:3000/",
-  // timeout: 5000,
   baseURL: "https://nonephemeral-marge-empties.ngrok-free.dev",
   timeout: 10000,
    headers: {
