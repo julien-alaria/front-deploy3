@@ -19,7 +19,7 @@ function Leaderboard() {
   const [message, setMessage] = useState("");
   const [showVotesModal, setShowVotesModal] = useState(false);
   const [movieToView, setMovieToView] = useState(null);
-  const uploadBase = "http://localhost:3000/uploads";
+  const uploadBase = import.meta.env.VITE_API_URL || "http://localhost:3000/uploads";
 
   // Fetch all movies
   const { data } = useQuery({

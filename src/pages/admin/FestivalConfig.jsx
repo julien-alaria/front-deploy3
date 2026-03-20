@@ -367,7 +367,7 @@ function SponsorsManager() {
 
   const startEdit = (sp) => {
     setForm({ name: sp.name, category: sp.category || "divers", url: sp.url || "", logo: null });
-    setPreview(`http://localhost:3000${sp.logo}`);
+    setPreview(`import.meta.env.VITE_API_URL${sp.logo}` ||`http://localhost:3000${sp.logo}`)
     setEditId(sp.id_sponsor);
     setShowForm(true);
   };
@@ -553,7 +553,7 @@ function SponsorsManager() {
                     >
                       <div className="w-12 h-10 flex-shrink-0 bg-white/8 rounded-lg flex items-center justify-center overflow-hidden">
                         <img
-                          src={`http://localhost:3000${sp.logo}`}
+                          src={`import.meta.env.VITE_API_URL${sp.logo}` ||`http://localhost:3000${sp.logo}`}
                           alt={sp.name}
                           className="max-h-full max-w-full object-contain p-1"
                           onError={(e) => { e.target.style.display = "none"; }}

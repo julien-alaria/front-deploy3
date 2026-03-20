@@ -141,7 +141,7 @@ export default function SponsorsAdmin() {
         {sponsors.map((sponsor) => (
           <div key={sponsor.id_sponsor} className="border p-4 rounded">
             <img
-              src={`http://localhost:3000${sponsor.logo}`}
+              src={`import.meta.env.VITE_API_URL${sp.logo}` ||`http://localhost:3000${sp.logo}`}
               alt={sponsor.name}
               className="h-20 object-contain mb-2"
             />
