@@ -1,0 +1,153 @@
+@import "tailwindcss";
+
+@theme {
+  --font-outfit: "Outfit", sans-serif;
+}
+
+html, body, #root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-outfit);
+  background-color: #000;
+  overflow-x: hidden;
+}
+
+@layer utilities {
+  .font-outfit {
+    font-family: var(--font-outfit);
+  }
+
+  .bg-gradient-hero {
+    background: linear-gradient(135deg, #7DBDFF 0%, #C77DFF 50%, #FF7DB8 100%);
+  }
+
+  .bg-gradient-hero-soft {
+    background: linear-gradient(135deg, #C77DFF 0%, #FF7DB8 100%);
+  }
+
+  .text-gradient-hero {
+    background: linear-gradient(135deg, #7DBDFF 0%, #C77DFF 50%, #FF7DB8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-hero-soft {
+    background: linear-gradient(135deg, #C77DFF 0%, #FF7DB8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .text-gradient-warm {
+    background: linear-gradient(135deg, #FF7DB8 0%, #FF9F7F 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    opacity: 0;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .scrollbar-thin-dark::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .scrollbar-thin-dark::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin-dark::-webkit-scrollbar-thumb {
+    background: #404040;
+    border-radius: 4px;
+  }
+
+  .scrollbar-thin-dark::-webkit-scrollbar-thumb:hover {
+    background: #525252;
+  }
+}
+
+@media (max-width: 639px) {
+  .mobile-modal-overlay {
+    padding: 0 !important;
+    align-items: stretch !important;
+    justify-content: stretch !important;
+  }
+
+  .mobile-modal-panel {
+    width: 100% !important;
+    max-width: none !important;
+    height: 100dvh !important;
+    max-height: 100dvh !important;
+    border-radius: 0 !important;
+    overflow-y: auto !important;
+  }
+
+  .mobile-modal-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(3, 7, 18, 0.95);
+    backdrop-filter: blur(8px);
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+
+  .mobile-modal-footer,
+  .mobile-form-footer {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    background: rgba(3, 7, 18, 0.95);
+    backdrop-filter: blur(8px);
+    padding-top: 0.75rem;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  }
+}
+
+
+
+
+/* login display */
+@keyframes sway {
+  0%, 100% { transform: translateX(0) rotate(12deg); }
+  50% { transform: translateX(30px) rotate(12deg); }
+}
+
+
+
+/* Correction pour l'autofill des navigateurs */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: white;
+  transition: background-color 5000s ease-in-out 0s;
+  background-color: transparent !important;
+}
+
+
+
+/* Select option background — cannot be done with Tailwind utilities.
+   Required for dark-theme selects in ProducerHome form. */
+select option {
+  background-color: #0f1014;
+  color: white;
+}

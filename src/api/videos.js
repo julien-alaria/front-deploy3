@@ -1,0 +1,136 @@
+import instance from "./config.js";
+
+/**
+ * Récupère la liste de tous les films/vidéos
+ * Endpoint: GET /movies
+ */
+async function getVideos() {
+  return await instance.get("movies");
+}
+
+/**
+ * Récupère les films assignés au jury connecté
+ * Endpoint: GET /movies/assigned
+ */
+async function getAssignedMovies() {
+  return await instance.get("movies/assigned");
+}
+
+/**
+ * Promotion candidature (JURY)
+ * Endpoint: PUT /movies/:id/jury-candidate
+ */
+async function promoteMovieToCandidateByJury(id, jury_comment = "") {
+  return await instance.put(`movies/${id}/jury-candidate`, { jury_comment });
+}
+
+/**
+ * Met à jour le statut d'un film
+ * Endpoint: PUT /movies/:id/status
+ *
+ * FIX B-07: Accepte un 3ème paramètre `options` pour passer force_transition: true
+ * depuis le panneau "Forcer un statut" de la modale admin.
+ * Sans ce flag, le panneau obéissait quand même à la transitionMap backend
+ * et retournait 400 pour les transitions inhabituelles.
+ *
+ * @param {number|string} id          - ID du film
+ * @param {string}        status      - Nouveau statut cible
+ * @param {object}        [options]   - Options supplémentaires (ex: { force_transition: true })
+ */
+async function updateMovieStatus(id, selection_status, options = {}) {
+  return await instance.put(`movies/${id}/status`, { selection_status, ...options });
+}
+
+/**
+ * Envoie l'email de refus pour un film (ADMIN)
+ * Endpoint: POST /newsletter/movie/:id/send-reject-email
+ */
+async function sendRejectEmailForMovie(id) {
+  return await instance.post(`newsletter/movie/${id}/send-reject-email`);
+}
+
+/**
+ * Met à jour un film (ADMIN)
+ * Endpoint: PUT /movies/:id
+ */
+async function updateMovie(id, payload) {
+  if (payload instanceof FormData) {
+    return await instance.put(`movies/${id}`, payload, {
+      headers: { "Content-Type": "multipart/form-data" }
+    });
+  } else {
+    return await instance.put(`movies/${id}`, payload);
+  }
+}
+
+/**
+ * Supprime un film
+ * Endpoint: DELETE /movies/:id
+ */
+async function deleteMovie(id) {
+  return await instance.delete(`movies/${id}`);
+}
+
+/**
+ * Met à jour les catégories d'un film
+ * Endpoint: PUT /movies/:id/categories
+ */
+async function updateMovieCategories(id, categories) {
+  return await instance.put(`movies/${id}/categories`, { categories });
+}
+
+/**
+ * Met à jour les jurys assignés à un film
+ * Endpoint: PUT /movies/:id/juries
+ */
+async function updateMovieJuries(id, juryIds) {
+  return await instance.put(`movies/${id}/juries`, { juryIds });
+}
+
+/**
+ * Récupère toutes les catégories
+ * Endpoint: GET /categories
+ */
+async function getCategories() {
+  return await instance.get("categories");
+}
+
+/**
+ * Crée une catégorie (ADMIN)
+ * Endpoint: POST /categories
+ */
+async function createCategory(name) {
+  return await instance.post("categories", { name });
+}
+
+/**
+ * Met à jour une catégorie (ADMIN)
+ * Endpoint: PUT /categories/:id
+ */
+async function updateCategory(id, name) {
+  return await instance.put(`categories/${id}`, { name });
+}
+
+/**
+ * Supprime une catégorie (ADMIN)
+ * Endpoint: DELETE /categories/:id
+ */
+async function deleteCategory(id) {
+  return await instance.delete(`categories/${id}`);
+}
+
+export {
+  getVideos,
+  getAssignedMovies,
+  promoteMovieToCandidateByJury,
+  updateMovieStatus,
+  sendRejectEmailForMovie,
+  updateMovie,
+  updateMovieCategories,
+  updateMovieJuries,
+  getCategories,
+  createCategory,
+  updateCategory,
+  deleteCategory,
+  deleteMovie
+};
