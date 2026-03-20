@@ -1,13 +1,9 @@
 import "./i18n";
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-
 import { BrowserRouter, Route, Routes } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
 import "./index.css";
-
 import Home from "./pages/public/Home.jsx";
 import Dashboard from "./pages/admin/Dashboard.jsx";
 import AdminLayout from "./layouts/AdminLayout.jsx";

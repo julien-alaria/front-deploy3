@@ -9,4 +9,4 @@
  *   VITE_UPLOAD_BASE=https://mondomaine.com/uploads
  */
 export const UPLOAD_BASE =
-  import.meta.env.VITE_UPLOAD_BASE || "http://localhost:3000/uploads";
+  import.meta.env.VITE_UPLOAD_BASE || "https://nonephemeral-marge-empties.ngrok-free.dev/uploads";
